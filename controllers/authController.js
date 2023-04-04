@@ -70,6 +70,37 @@ const loginController = async(req,res) => {
 }
 
 
+const forgotPasswordController = async(req,res)=>{
+  try{
+    const {email,answer, newPassword} = req.body;
+    if(!email){
+      res.status(400).send({message:'Email is required'});
+    }
+    else if(!answer){
+      res.status(400).send({message:'Answer is required'});
+    }
+    else if(!newPassword){
+      res.status(400).send({message:'New password is required'});
+    }
+    //check
+    const user = await userModel.findOne({email,answer});
+    //validate
+    if(!user){
+      return res.status(404).send({success:false, message: 'Wrong email or answer'});
+    }
+    const hashed = await hashPassword(newPassword);
+    await userModel.findByIdAndUpdate(user._id, {password:hashed});
+    res.status(201).send({success:true,message: 'Password reset successful'});
+  }catch(error){
+    console.log("eeeeeeeeeeeeee=" + error);
+    res.status(500).send({success:false, message: 'Something went wrong', error});
+  }
+}
+
+
+
+
+
 
 const testController = async(req,res) => {
  try{
@@ -80,4 +111,4 @@ const testController = async(req,res) => {
  }
 }
 
-export {registerController, loginController,testController}
+export {registerController, loginController,testController,forgotPasswordController}
