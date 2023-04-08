@@ -40,11 +40,17 @@ const Header = () => {
         <li className="nav-item">
         <NavLink to="/register" className="nav-link" href="#">Register</NavLink>
       </li>
+
+      
       <li className="nav-item">
         <NavLink to="/login" className="nav-link" href="#">Login</NavLink>
       </li> 
       </>) : 
-      (<>
+      (<>  
+      
+       <li className="nav-item">
+        <NavLink  to={`/dashboard/${auth?.user?.role === 1 ? 'admin':'user'}`} className="nav-link" >Dashboard</NavLink>
+      </li>    
        <li className="nav-item">
         <NavLink  onClick={handleLogout} to="/login" className="nav-link" href="#">Logout</NavLink>
       </li> 
@@ -52,7 +58,7 @@ const Header = () => {
       <li className="nav-item">
         <NavLink to="/cart" className="nav-link" href="#">Cart(0)</NavLink>
       </li>
-  
+
     </ul>
   </div>
 </nav>

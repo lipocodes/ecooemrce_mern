@@ -23,10 +23,6 @@ const userSchema = new mongoose.Schema({
     type:String,
     required:true
   },
-  question:{
-    type:String,
-    required:true
-  },
   answer:{
    type:String,
    required:true
@@ -38,4 +34,4 @@ const userSchema = new mongoose.Schema({
 
 }, {timestamps:true});
 
-export default mongoose.model('users',userSchema, 'users'); //users is the collection name
+export default mongoose.model('Users',userSchema, 'users'); //users is the collection name
