@@ -41,7 +41,7 @@ export const createProductController = async(req,res)=>{
 }
 
 
-export const updateProductController = async(req,res)=>{
+export const updateProductController = async(req,res)=>{ 
     try{
         //another way of  reading req transmittined by the fronthend
         const {name,slug, description, price, category, quantity} = req.fields;
@@ -76,7 +76,7 @@ export const updateProductController = async(req,res)=>{
 
 export const getProductsController = async(req,res)=>{
  try{
-   const products = await productModel.find({}).populate('category').select("-photo").limit(12).sort({createdAt:-1}) ;
+   const products = await productModel.find({});
    res.status(200).send({success:true, message:'Products retreived successfully', products, counTotal:products.length});
   }catch(error) {
     console.log("eeeeeeeeeeeeeee=" + error);
@@ -87,7 +87,8 @@ export const getProductsController = async(req,res)=>{
 export const getSingleProductController = async(req,res)=>{
   try{
     const {slug} =  req.params;
-    const product = await productModel.findOne({slug}).select("-photo").populate("category");
+    //const product = await productModel.findOne({slug}).select("-photo").populate("category");
+    const product = await productModel.findOne({slug});
     res.status(200).send({success:true, message:"Product retreived", product});
   }catch(error){
     console.log("eeeeeeeeeeeeeeeee=" + error);
