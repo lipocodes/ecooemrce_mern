@@ -124,3 +124,47 @@ export const deleteProductController = async(req,res)=>{
         res.status(500).send({success:false, message: "Can't delete product"});
     }
 }
+
+
+
+export const productFilterController = async(req,res)=>{
+  try{
+   const {checked,radio} = req.body;
+   let args = {};
+   if(checked.length>0){
+    args.category = checked;
+   }
+   if(radio.length){
+    args.price = {$gte:radio[0], $lte:radio[1]}
+   }
+   const products = await productModel.find(args);
+   res.status(200).send({success:true, message:'products retreived', products});
+  }catch(error){
+    console.log("eeeeeeeeeeeee=" + error);
+    res.status(400).send({success:false, message:'Error in filtering products', error}); 
+  }
+}
+
+
+export const productCountController = async(req,res)=>{
+  try{
+    const total = await productModel.find({}).estimatedDocumentCount();
+    res.status(200).send({success:true, message:'products counted', total});
+  }catch(error){
+    console.log("eeeeeeeeeeeeee="  +error);
+    res.status(400).send({success:false, message:"Error in counting products", error});
+  }
+}
+
+
+export const productListController = async(req,res)=>{
+  try{
+    const perPage = 2;
+    const page = req.params.page  ? req.params.page : 1;
+    const products = await productModel.find({}).select("-photo").skip((page-1)*perPage).limit(perPage).sort({createdAt: -1}) ; 
+    res.status(200).send({success:true, message:'Per page successful', products});
+  }catch(error){
+    console.log("eeeeeeeeeeeeeee=" + error);
+    res.status(400).send({success:false, message:"Error in per page controller", error});
+  }
+}
