@@ -88,7 +88,7 @@ export const getSingleProductController = async(req,res)=>{
   try{
     const {slug} =  req.params;
     //const product = await productModel.findOne({slug}).select("-photo").populate("category");
-    const product = await productModel.findOne({slug});
+    const product = await productModel.findOne({slug}).select("-photo");
     res.status(200).send({success:true, message:"Product retreived", product});
   }catch(error){
     console.log("eeeeeeeeeeeeeeeee=" + error);
@@ -166,5 +166,40 @@ export const productListController = async(req,res)=>{
   }catch(error){
     console.log("eeeeeeeeeeeeeee=" + error);
     res.status(400).send({success:false, message:"Error in per page controller", error});
+  }
+}
+
+
+
+
+export const searchProductController = async(req,res)=>{
+  try{
+    const {keyword}  = req.params;
+    const results = await productModel.find({
+      $or: [
+        {name: {$regex:keyword,$options:"i"}},
+        {description: {$regex:keyword,$options:"i"}}
+      ]
+    }).select("-photo");
+    res.status(200).send({success:true, message:"search performed", results});
+  }catch(error){
+    console.log("eeeeeeeeeeeee=" + error);
+    res.status(400).send({success:false, message:"Error in searchProductController()"});
+  }
+}
+
+
+
+export const relatedProductController = async(req,res)=>{
+  try{
+    const {pid,cid} = req.params;
+    const products = await productModel.find({
+      category: cid,
+      _id:{$ne:pid}
+    }).select("-photo").limit(3);
+    res.status(200).send({success:true, message:'Similar products retreived', products});
+  }catch(error){
+    console.log("eeeeeeeeeeee=" + error);
+    res.status(400).send({success:false, message: 'Error in relatedProductController()', error});
   }
 }
