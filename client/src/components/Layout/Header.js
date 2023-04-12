@@ -4,10 +4,14 @@ import {GiShoppingCart}  from 'react-icons/gi';
 import {useAuth} from '../../context/auth';
 import {toast} from 'react-hot-toast';
 import SearchInput from '../Form/SearchInput';
+import useCategory from '../../hooks/useCategory';
+import Dropdown from './Dropdown';
 
 const Header = () => {
 
  const [auth,setAuth] = useAuth();
+ const categories = useCategory();
+
 
  const handleLogout = (e) =>{
    setAuth({
@@ -34,10 +38,11 @@ const Header = () => {
       <li className="nav-item">
         <NavLink to="/" className="nav-link">Home <span className="sr-only">(current)</span></NavLink>
       </li>
-      <li className="nav-item">
-        <NavLink to="/category" className="nav-link">Category <span className="sr-only">(current)</span></NavLink>
-      </li>
 
+      <li className="nav-item">
+        <Dropdown categories={categories}/>
+      </li>
+      
       { !auth.user? (<>
         <li className="nav-item">
         <NavLink to="/register" className="nav-link" href="#">Register</NavLink>
