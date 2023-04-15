@@ -14,11 +14,12 @@ const [email,setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [auth,setAuth] = useAuth();
 
-const handleSubmit = async(e)=>{
+const handleSubmit = async(e)=>{ 
     e.preventDefault();
     try{
        const res = await axios.post(`/api/v1/auth/login`, 
        {email,password});
+       console.log("aaaaaaaaaaaaaa=" + JSON.stringify(res));
        if(res.data.success){
          toast.success(res.data.message);
          setAuth({
@@ -27,6 +28,7 @@ const handleSubmit = async(e)=>{
           token: res.data.token
          });
          localStorage.setItem("auth",JSON.stringify(res.data));
+       
          navigate( location.state ||'/');
        }else{
            toast.error(res.data.message);  

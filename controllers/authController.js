@@ -114,4 +114,29 @@ const testController = async(req,res) => {
  }
 }
 
-export {registerController, loginController,testController,forgotPasswordController}
+
+
+const updateProfileController = async(req,res) => {
+  try{
+    const {email,name,phone,address,password} = req.body;
+    const user = await userModel.findById(req.user._id);
+    if(!password || password.length<6){
+      return res.json({error: "Password of 6 chars minimum is required"});
+    }
+
+    const hashedPassword = password ? await hashPassword(password) : undefined;
+
+    const updatedUser = await userModel.findByIdAndUpdate(req.user._id, {
+      name: name || user.name,
+      password: hashedPassword || user.password,
+      phone: phone || user.password,
+      address: address || user.address
+    }, {new:true});
+    res.status(201).send({success:true, message: 'Profile update successful', updatedUser});
+  }catch(error){
+    console.log("eeeeeeeeeee=" + error);
+    res.status(500).send({success:false, message:"Error in updateProfileController()", error});
+  }
+}
+
+export {registerController, loginController,testController,forgotPasswordController, updateProfileController}
