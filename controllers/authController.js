@@ -163,7 +163,7 @@ const getAllOrdersController = async(req,res) => {
 
 
 //order status
-orderStatusController = async (req, res) => {
+const orderStatusController = async (req, res) => {
   try {
     const { orderId } = req.params;
     const { status } = req.body;
