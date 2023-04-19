@@ -23,9 +23,8 @@ const navigate  = useNavigate();
 
 const getTotal = async() =>{
   try{
-    console.log("aaaaaaaaaaaaaaaaa=");
+    let x=0;
     const {data} = await axios.get("https://mern-ecommerce-ous2.onrender.com/api/v1/product/product-count");
-    console.log("bbbbbbbbbbbbb=" + JSON.stringify(data));
     if(data.success){
       toast.success("Total products are ${total}");
       setTotal(data?.total);
@@ -41,7 +40,7 @@ const getTotal = async() =>{
 
 const getAllCategory = async(req,res)=>{
   try{
-    const {data} = await axios.get("/api/v1/category/get-category");
+    const {data} = await axios.get("https://mern-ecommerce-ous2.onrender.com/api/v1/category/get-category");
     if(data?.success){
       setCategories(data?.category);
     }
@@ -54,7 +53,7 @@ const getAllCategory = async(req,res)=>{
 const getAllProducts = async()=>{
   try{
     setLoading(true);
-    const {data} = await axios.get(`/api/v1/product/product-list/${page}`);
+    const {data} = await axios.get(`https://mern-ecommerce-ous2.onrender.com/api/v1/product/product-list/${page}`);
     setLoading(false);
     toast.success("Product retreived");
     setProducts(data.products);
