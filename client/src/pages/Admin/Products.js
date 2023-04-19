@@ -9,7 +9,7 @@ const Products = () => {
     const [products, setProducts] = useState([]);
   const getAllProducts = async() =>{
     try{
-      const {data} = await axios.get("/api/v1/product/get-products");
+      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/get-products`);
       if(data.success){
         toast.success("Product list retreived");
         setProducts(data.products);
@@ -36,7 +36,7 @@ const Products = () => {
             {products?.map((p)=> (
              <Link  className='product-link' key={p._id} to={`/dashboard/admin/product/${p.slug}`}>
                <div className="card m-2" style={{width: '18rem', }} >
-               <img className="card-img-top" src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} />
+               <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
                <div className="card-body">
                  <h5 className="card-title">{p.name}</h5>
                  <p className="card-text">{p.description}</p>

@@ -13,7 +13,7 @@ const navigate  = useNavigate();
  
  const getProduct = async()=>{
     try{
-      const {data} = await axios.get(`/api/v1/product/single-product/${params.slug}`);
+      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/single-product/${params.slug}`);
       setProduct(data?.product);
       getSimilarProducts(data?.product._id, data?.product.category);
     }catch(error){
@@ -25,7 +25,7 @@ const navigate  = useNavigate();
 const getSimilarProducts = async(pid,cid)=>{
   
     try{
-      const {data} = await axios.get(`/api/v1/product/related-product/${pid}/${cid}`);
+      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/related-product/${pid}/${cid}`);
       setRelatedProducts(data?.products);
     }catch(error){
      console.log("eeeeeeeeeeeeeeee=" + error);
@@ -43,7 +43,7 @@ const getSimilarProducts = async(pid,cid)=>{
       
       <div className='row container mt-2'>
         <div className='col-md-6'>
-          <img className="card-img-top" src={`/api/v1/product/product-photo/${product._id}`} alt={product.name} height="300" width="350px"/>    
+          <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`} alt={product.name} height="300" width="350px"/>    
         </div>
         <div className='col-md-6'>
           <h1  className='text-center'>Product Details</h1>
