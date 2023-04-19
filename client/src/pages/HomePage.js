@@ -23,7 +23,9 @@ const navigate  = useNavigate();
 
 const getTotal = async() =>{
   try{
-    const {data} = await axios.get("/api/v1/product/product-count");
+    console.log("aaaaaaaaaaaaaaaaa=");
+    const {data} = await axios.get("https://mern-ecommerce-ous2.onrender.com/api/v1/product/product-count");
+    console.log("bbbbbbbbbbbbb=" + JSON.stringify(data));
     if(data.success){
       toast.success("Total products are ${total}");
       setTotal(data?.total);
