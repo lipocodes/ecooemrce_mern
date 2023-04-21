@@ -20,9 +20,9 @@ const SearchInput = () => {
 
     return (
     <div>
-     <form className="form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
-       <input  value={values.keyword} onChange={(e)=>setValues({...values, keyword:e.target.value})} className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+     <form className="d-flex form-inline my-2 my-lg-0" onSubmit={handleSubmit} >
+       <input  value={values.keyword} onChange={(e)=>setValues({...values, keyword:e.target.value})} className="form-control mr-sm-2" style={{maxHeight:"40px"}} type="search" placeholder="Search" aria-label="Search" />
+       <button className="btn btn-outline-success my-1 mx-2 my-sm-0" style={{maxHeight:"50px"}} type="submit">Search</button>
      </form>
     </div>
   )

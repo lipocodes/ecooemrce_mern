@@ -27,31 +27,50 @@ const Header = () => {
 
   return (
     <>    
-      <div class="row" style={{margin:"3% 3%"}}>
-        <div className='col-md-2' style={{width:"200px"}} >
-          <SearchInput/>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <center>
+        <div class="row">
+
+          <div className='col-md-3' style={{maxWidth:"250px"}} >
+            <GiShoppingCart style={{marginLeft:"0.5rem"}}/>
+            <Link  to="/" className="navbar-brand">Ecommerce App</Link>  
+          </div>
+
+          <div className='col-md-1'>
+            <Badge count={cart?.length ? cart.length:"0"} showZero>
+              <NavLink to="/cart" className="nav-link" href="#">Cart </NavLink>
+            </Badge>  
+          </div>
+      
+          <div className='col-md-1' style={{width:"250px"}} >
+            <SearchInput/>
+          </div>
+        
+          <div className='col-md-1 h6' >
+            <NavLink to="/" className="nav-link">Home <span className="sr-only">(current)</span></NavLink>  
+          </div>
+
+          <div className='col-md-1 h6'>
+            <NavLink to="/register" className="nav-link" href="#">Register</NavLink>
+          </div>
+
+          <div className='col-md-1 h6'>
+            <NavLink to="/login" className="nav-link" href="#">Login</NavLink>
+          </div>
+
+          <div className='col-md-1 h6'>
+            <NavLink  to={`/dashboard/${auth?.user?.role === 1 ? 'admin':'user'}`} className="nav-link" >Dashboard</NavLink>  
+          </div>
+
+    
+
+          <div className='col-md-3'>
+            <Dropdown categories={categories}/>
+          </div>
+          
         </div>
-        <div className='col-md-2 h5' >
-          <NavLink to="/" className="nav-link">Home <span className="sr-only">(current)</span></NavLink>  
-        </div>
-        <div className='col-md-2 h5'>
-          <NavLink to="/register" className="nav-link" href="#">Register</NavLink>
-        </div>
-        <div className='col-md-2 h5'>
-          <NavLink to="/login" className="nav-link" href="#">Login</NavLink>
-        </div>
-        <div className='col-md-2 h5'>
-          <NavLink  to={`/dashboard/${auth?.user?.role === 1 ? 'admin':'user'}`} className="nav-link" >Dashboard</NavLink>  
-        </div>
-        <div className='col-md-2'>
-          <Badge count={cart?.length ? cart.length:"0"} showZero>
-            <NavLink to="/cart" className="nav-link" href="#">Cart </NavLink>
-          </Badge>  
-        </div>
-        <div className='col-md-1'>
-          <Dropdown categories={categories}/>
-        </div>
-      </div>
+        </center>
+      </nav>
     </>
 
   )

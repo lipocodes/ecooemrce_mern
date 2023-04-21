@@ -14,9 +14,9 @@ const Search = () => {
           
           <div className='d-flex flex-wrap mt-4'>
             {values?.results.results.map((p)=> (
-               <Link  className='product-link' key={p._id} to={`/dashboard/admin/product/${p.slug}`}>
+               <Link  className='product-link' key={p._id} to={`${process.env.REACT_APP_API}/dashboard/admin/product/${p.slug}`}>
                  <div className="card m-2" style={{width: '18rem', }} >
-                 <img className="card-img-top" src={`/api/v1/product/product-photo/${p._id}`} alt={p.name} />
+                 <img className="card-img-top" src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`} alt={p.name} />
                  <div className="card-body">
                    <h5 className="card-title">{p.name}</h5>
                    <p className="card-text">{p.description.substring(0,30)}...</p>

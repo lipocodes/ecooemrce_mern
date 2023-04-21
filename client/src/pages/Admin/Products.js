@@ -30,9 +30,9 @@ const Products = () => {
         <div className='col-md-3'>
           <AdminMenu />
         </div>
-        <div className='col-md-9'>
+        <div className='col-md-9 mt-3'>
           <h1 className='text-center'>All Products List</h1>
-          <div className='d-flex'>
+          <div className='d-flex flex-wrap' style={{margin:"20px"}}>
             {products?.map((p)=> (
              <Link  className='product-link' key={p._id} to={`/dashboard/admin/product/${p.slug}`}>
                <div className="card m-2" style={{width: '18rem', }} >
