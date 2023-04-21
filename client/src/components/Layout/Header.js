@@ -26,57 +26,34 @@ const Header = () => {
  }
 
   return (
-    <>
-    
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon" />
-  </button>
-  <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <GiShoppingCart style={{marginLeft:"0.5rem"}}/>
-    <Link  to="/" className="navbar-brand">Ecommerce App</Link>
-    <ul className="navbar-nav ms-auto mb-2 mt-lg-0">
-      <SearchInput/>
-      <li className="nav-item">
-        <NavLink to="/" className="nav-link">Home <span className="sr-only">(current)</span></NavLink>
-      </li>
-
-      <li className="nav-item">
-        <Dropdown categories={categories}/>
-      </li>
-      
-      { !auth.user? (<>
-        <li className="nav-item">
-        <NavLink to="/register" className="nav-link" href="#">Register</NavLink>
-      </li>
-
-      
-      <li className="nav-item">
-        <NavLink to="/login" className="nav-link" href="#">Login</NavLink>
-      </li> 
-      </>) : 
-      (<>  
-      
-       <li className="nav-item">
-        <NavLink  to={`/dashboard/${auth?.user?.role === 1 ? 'admin':'user'}`} className="nav-link" >Dashboard</NavLink>
-      </li>    
-       <li className="nav-item">
-        <NavLink  onClick={handleLogout} to="/login" className="nav-link" href="#">Logout</NavLink>
-      </li> 
-      </>)}
-      <li className="nav-item">
-        <Badge count={cart?.length ? cart.length:"0"} showZero>
-          <NavLink to="/cart" className="nav-link" href="#">Cart </NavLink>
-        </Badge>
-       
-      </li>
-
-    </ul>
-  </div>
-</nav>
- 
-       
+    <>    
+      <div class="row" style={{margin:"3% 3%"}}>
+        <div className='col-md-2' style={{width:"200px"}} >
+          <SearchInput/>
+        </div>
+        <div className='col-md-2 h5' >
+          <NavLink to="/" className="nav-link">Home <span className="sr-only">(current)</span></NavLink>  
+        </div>
+        <div className='col-md-2 h5'>
+          <NavLink to="/register" className="nav-link" href="#">Register</NavLink>
+        </div>
+        <div className='col-md-2 h5'>
+          <NavLink to="/login" className="nav-link" href="#">Login</NavLink>
+        </div>
+        <div className='col-md-2 h5'>
+          <NavLink  to={`/dashboard/${auth?.user?.role === 1 ? 'admin':'user'}`} className="nav-link" >Dashboard</NavLink>  
+        </div>
+        <div className='col-md-2'>
+          <Badge count={cart?.length ? cart.length:"0"} showZero>
+            <NavLink to="/cart" className="nav-link" href="#">Cart </NavLink>
+          </Badge>  
+        </div>
+        <div className='col-md-1'>
+          <Dropdown categories={categories}/>
+        </div>
+      </div>
     </>
+
   )
 }
 
