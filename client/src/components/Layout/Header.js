@@ -31,7 +31,7 @@ const Header = () => {
         <center>
         <div class="row">
 
-          <div className='col-md-3' style={{maxWidth:"250px"}} >
+          <div className='col-md-3 m-auto' style={{maxWidth:"250px"}} >
             <GiShoppingCart style={{marginLeft:"0.5rem"}}/>
             <Link  to="/" className="navbar-brand">Ecommerce App</Link>  
           </div>
@@ -42,7 +42,7 @@ const Header = () => {
             </Badge>  
           </div>
       
-          <div className='col-md-1' style={{width:"250px"}} >
+          <div className='col-md-1 m-auto' style={{width:"250px"}} >
             <SearchInput/>
           </div>
         
@@ -55,7 +55,7 @@ const Header = () => {
           </div>
 
           <div className='col-md-1 h6'>
-            <NavLink to="/login" className="nav-link" href="#">Login</NavLink>
+            <NavLink to="/login" className="nav-link"  style={{ textDecoration: 'none' }} href="#">Login</NavLink>
           </div>
 
           <div className='col-md-1 h6'>
